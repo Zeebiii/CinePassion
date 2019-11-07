@@ -329,7 +329,7 @@ abstract class controleur {
 		
 	
 	}
-	/*
+	
 	public function __set($cle,$valeur){
 	    if(substr($cle,0,7) != "encarts"){
 	        $this->donnees[$cle] = $valeur;
@@ -337,24 +337,41 @@ abstract class controleur {
 	        $this->donnees[$cle][] = $valeur;
 	    }
 	}
-	*/
-	
-	public function __set($cle,$valeur){
-	  	  $this->donnees[$cle] = $valeur;
-	 }
 	
 	
 	
-	private function getChemin($unFichier){
-	    if (strpos($unFichier, '.css') == true) {
-	        return "<link rel='stylesheet' type='text/css' href='./css/"+$unFichier+"' />\n";
-	    }elseif (strpos($unFichier, '') == ".js"){
-	        return "";
-	        
-	    }
-	}
+
+	   
 	
 	/**
+	 * Méthode qui permet en fonction du type de fichier passer en parametre de renvoyer le bon chemin d'acces a celui-ci. (CSS,JS) 
+	 * @param nom du fichier avec l'extention $fichier
+	 * @return string chaine de charactère qui rep^resente le chemin d'acces du fichier passer en parametre. 
+	 */
+	protected function getChemin($fichier){
+	    if (!strpos($fichier, ".")){ //Si la chaine de passer en parametre contient un "." alors 
+	        $chaine = configuration::get("dossierLibrairie"); //Grace a la méthode get de ma classe configuration je vais venir chercher dans le fichier dev.ini le parametre qui m'intereese. 
+	        $resultat = "<link rel='stylesheet' type='text/css' href='" . $chaine . $fichier ."/css/" . $fichier . ".css' />\n
+                         <script type='text/javascript' src='" . $chaine . $fichier ."/js/" . $fichier . ".js'></script>\n";
+	    } else {
+	        $extension = pathinfo($fichier, PATHINFO_EXTENSION);
+	        $Tableau = explode("!", configuration::get("dossier" . $extension));
+	        foreach ($Tableau as $string){
+	            if (file_exists($string . $fichier)) {
+	                $fichier = $string . $fichier;
+	            }
+	            
+	        }
+	        if ($extension == "css") {
+	            $resultat = "<link rel='stylesheet' type='text/css' href='". $fichier ."' />\n";
+	        } else {
+	            $resultat = "<script type='text/javascript' src='" . $fichier ."'></script>\n";
+	        }
+	    }
+	    return $resultat;
+	}
+	
+/**
 	 * ajoute au tableau Donnee les encart x encoarts a afficher 
 	 * @param integer : nombre d'encart(s) a afficher
 	 * @author Loris Fariello
@@ -377,9 +394,6 @@ abstract class controleur {
 	       return $listEncart;
 
 	    }
-	
-	
-	   
 	
 	
 } // class

@@ -32,26 +32,15 @@
 		
 		<?php 
 	
-// 		foreach ($films as $unFilm) {
-// 		    echo "<tr>";
-// 		    //echo "<td class='titre'>$unFilm->titreFilm</td>";
-// 		    echo "<td class='titre'>" . $unfilm->getUnElement()->titreFilm . "</td>";
-// 		    echo "<td class='genre'>genre</td>";
-// 		    //echo "<td class='annee'>" . substr($unFilm->dateSortieFilm, 0, (strlen($unFilm->dateSortieFilm)) - 6) . "</td>";
-// 		    //echo "<td class='duree'>" . substr($unFilm->dureeFilm, 0, (strlen($unFilm->dureeFilm)) - 3) . "</td>";
-// 		    echo "</tr>";
-		    
-// 		}
-		
-		while (!$films->estVide()) {
-		    $unFilm = $films->getUnElement();
+		foreach ($films as $unFilm) {
 		    echo "<tr>";
 		    //echo "<td class='titre'>$unFilm->titreFilm</td>";
-		    echo "<td class='titre'>" . $unFilm->titreFilm . "</td>";
-		    echo "<td class='genre'>" . $unFilm->genre . "</td>";
-		    echo "<td class='annee'>" . $unFilm->annee . "</td>";
-		    echo "<td class='duree'>" . $unFilm->duree . "</td>";
+	        echo "<td class='titre'>" . $films::getUnElement() . "</td>";
+		    echo "<td class='genre'>genre</td>";
+		    //echo "<td class='annee'>" . substr($unFilm->dateSortieFilm, 0, (strlen($unFilm->dateSortieFilm)) - 6) . "</td>";
+		    //echo "<td class='duree'>" . substr($unFilm->dureeFilm, 0, (strlen($unFilm->dureeFilm)) - 3) . "</td>";
 		    echo "</tr>";
+		    
 		}
 
 		?>

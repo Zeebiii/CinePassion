@@ -17,11 +17,10 @@ version = "2.0"
 adrTexteDefilant = "./texte/defilant/"
 adrEncarts = "./texte/encart/"
 
-[dossierRecherche]
-
-dirCss = "./css; ./framework/css"
-dirJs = "./javascript; ./framework/javascript"
-dirLib = "./librairie"
+[DossierRecherche]
+dossierjs = "./js/!./framework/js/"
+dossiercss = "./css/!./framework/css/"
+dossierLibrairie = "./librairie/"
 
 [SlideShowAccueilFilm]
 
