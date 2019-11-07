@@ -16,7 +16,7 @@
   
 class controleurFilmListe extends controleur {
     private $modelFilm;
-    
+    private $nbSection;
     public function __construct() {
         $this->modelFilm = new modeleFilmListe();
     }
@@ -30,6 +30,7 @@ class controleurFilmListe extends controleur {
     public function setDonnees() {
         
         $this->enteteLien = "<link rel='stylesheet' type='text/css' href='./css/tableau.css'/>\n";
+        $this->enteteLien .= "<link rel='stylesheet' type='text/css' href='./css/navigation.css'/>\n";
         // ===============================================================================================================
         // titres de la page
         // ===============================================================================================================
@@ -71,7 +72,8 @@ class controleurFilmListe extends controleur {
     
     public function defaut() {
         $this->nbFilm = $this->modelFilm->getNbFilms();
-        $this->films = $this->modelFilm->getAllFilms();
+        $this->films = $this->modelFilm->getAllFilms(0,configuration::get("nbFilmParSection"));
+        $this->nbSections = ceil($this->nbFilm / configuration::get("nbFilmParSection"));
         parent::genererVue();
     }
     

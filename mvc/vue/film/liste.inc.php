@@ -20,8 +20,8 @@
 	<table>
 		<tr class='entete'>
 			<th>les <?php echo $nbFilm;?> films</th>
-			<th>section n°1/x</th>
-			<th colspan='2'>films n°1 &agrave; x</th>
+			<th>section n°1/<?php echo $nbSections?></th>
+			<th colspan='2'>films n°1 &agrave; 11</th>
 		</tr>
 		<tr class='descCol'>
 			<th>titre</th>
@@ -32,23 +32,12 @@
 		
 		<?php 
 	
-// 		foreach ($films as $unFilm) {
-// 		    echo "<tr>";
-// 		    //echo "<td class='titre'>$unFilm->titreFilm</td>";
-// 		    echo "<td class='titre'>" . $unfilm->getUnElement()->titreFilm . "</td>";
-// 		    echo "<td class='genre'>genre</td>";
-// 		    //echo "<td class='annee'>" . substr($unFilm->dateSortieFilm, 0, (strlen($unFilm->dateSortieFilm)) - 6) . "</td>";
-// 		    //echo "<td class='duree'>" . substr($unFilm->dureeFilm, 0, (strlen($unFilm->dureeFilm)) - 3) . "</td>";
-// 		    echo "</tr>";
-		    
-// 		}
-		
+
 		while (!$films->estVide()) {
 		    $unFilm = $films->getUnElement();
 		    echo "<tr>";
-		    //echo "<td class='titre'>$unFilm->titreFilm</td>";
-		    echo "<td class='titre'>" . $unFilm->titreFilm . "</td>";
-		    echo "<td class='genre'>" . $unFilm->genre . "</td>";
+		    echo "<td class='titre'>" . "<a href='index.php/module=film&page=fiche&section=$unFilm->numFilm'><abbr title='Un film de $unFilm->prenomRealisateur $unFilm->nomRealisateur'> $unFilm->titreFilm </acronym></a>" . "</td>";
+		    echo "<td class='genre'>" . ucfirst($unFilm->genre) . "</td>";
 		    echo "<td class='annee'>" . $unFilm->annee . "</td>";
 		    echo "<td class='duree'>" . $unFilm->duree . "</td>";
 		    echo "</tr>";
@@ -57,5 +46,17 @@
 		?>
 		
 	</table>
+	
+	<div id="nav">
+	
+		<a href="index.php" class="premier"></a>
+		<a href="index.php" class="precedant"></a>
+		<a href="index.php" class="suivant"></a>
+		<a href="index.php" class="dernier"></a>
+<!-- 		<a> <img src="framework/image/btPremInactif.png"/> </a> -->
+<!-- 		<a> <img src="framework/image/btPrecInactif.png"/> </a> -->
+<!-- 		<a> <img src="framework/image/btSuivInactif.png"/> </a> -->
+<!-- 		<a> <img src="framework/image/btDerInactif.png"/> </a> -->
+	</div>
 	
 </div><!-- content2 -->
