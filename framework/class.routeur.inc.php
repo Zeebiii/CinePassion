@@ -49,6 +49,8 @@ class routeur {
 			$module = "home";
 			$page = "accueil";
 			$action = "defaut";
+			$section = null;
+			
 		}else {
 			$module = $requete->getParametre("module");
 			
@@ -58,6 +60,7 @@ class routeur {
 			if (!$requete->existeParametre("page")) {
 				$page = "accueil";
 				$action = "defaut";
+				$section = null;
 			}else {
 				$page = $requete->getParametre("page");
 				
@@ -69,9 +72,17 @@ class routeur {
 				}else {
 					$action = $requete->getParametre("action");
 				}
+				// ===============================================================================================================
+				// gestion du paramètre section
+				// ===============================================================================================================
+				if (!$requete->existeParametre("section")) {
+				    $section = 1;
+				}else {
+				    $section = intval($requete->getParametre("section"));
+				}
+				
 			}
 		}
-		
 		// ===============================================================================================================
 		// convertion de la valeur de certains paramètres en minuscule
 		// ===============================================================================================================
@@ -93,7 +104,7 @@ class routeur {
 			try {
 				require_once($fichierControleur);
 				$controleur =  new $classeControleur();
-				$controleur->setRequete($requete, $module, $page, $action);
+				$controleur->setRequete($requete, $module, $page, $action, $section);
 				$controleur->setDonnees();
 				return $controleur;
 			}catch (Exception $e) {

@@ -27,12 +27,18 @@ table tr td
 
 tr:nth-child(even)
 {
-	background-color: #E9E9E9;
+	background-color: #ebebeb;
 }
 
 tr:nth-child(odd)
 {
-	background-color: #ACACAC;
+	background-color: #bfbfbf;
+}
+
+tr:hover
+{
+	background-color: #a8a8a8;
+	content: "test";
 }
 
 .titre
@@ -53,4 +59,9 @@ tr:nth-child(odd)
 .duree
 {
 	width: 10%;
+}
+
+abbr
+{
+	text-decoration: none;
 }

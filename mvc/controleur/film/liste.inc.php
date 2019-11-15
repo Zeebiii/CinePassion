@@ -42,8 +42,7 @@ class controleurFilmListe extends controleur {
         // ===============================================================================================================
         // encarts
         // ===============================================================================================================
-        $this->encartsGauche = $this->getEncart(2);
-        
+        $this->encartsGauche = $this->getEncart(1);
         // ===============================================================================================================
         // texte défilant
         // ===============================================================================================================
@@ -72,8 +71,18 @@ class controleurFilmListe extends controleur {
     
     public function defaut() {
         $this->nbFilm = $this->modelFilm->getNbFilms();
-        $this->films = $this->modelFilm->getAllFilms(0,configuration::get("nbFilmParSection"));
-        $this->nbSections = ceil($this->nbFilm / configuration::get("nbFilmParSection"));
+        $this->nbFilmsSection = configuration::get("nbFilmParSection");
+        
+        $this->nbSections = maths::nbSection($this->nbFilm, $this->nbFilmsSection);
+        $this->premierFilm = ($this->section - 1) * $this->nbFilmsSection + 1;
+        $this->dernierFilm = ($this->section ==  $this->nbSections ? $this->nbFilm : $this->section * $this->nbFilmsSection);
+        
+        $this->films = $this->modelFilm->getAllFilms($this->premierFilm - 1, $this->nbFilmsSection);
+        
+        $this->navigation = $this->getNavigation();
+        
+        
+        
         parent::genererVue();
     }
     

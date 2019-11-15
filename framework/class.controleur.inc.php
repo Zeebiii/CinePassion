@@ -21,6 +21,7 @@ abstract class controleur {
 	protected $module;				// Le module après "traitement"
 	protected $page;				// La page après "traitement"
 	protected $action;				// L' action après "traitement"
+	protected $section;
 	protected $donnees = array();// Le tableau où sont stockées les données pour la vue
 	
 	/**
@@ -34,11 +35,12 @@ abstract class controleur {
 	 * @version 1.0
 	 * @copyright Christophe Goidin - juin 2017
 	 */
-	public function setRequete(requete $requete, $module, $page, $action) {
+	public function setRequete(requete $requete, $module, $page, $action, $section) {
 		$this->requete = $requete;
 		$this->module = $module;
 		$this->page = $page;
 		$this->action = $action;
+		$this->section = $section;
 	}
 	
 	/**
@@ -64,6 +66,7 @@ abstract class controleur {
 		// on positionne l'action dans le tableau $donnees afin d'y avoir accès dans la vue
 		// ===============================================================================================================
 		$this->donnees['action'] = $this->action;
+		$this->donnees['section'] = $this->section;
 
 		// ===============================================================================================================
 		// on positionne des données avec une valeur par défaut si elles n'ont pas été définies dans le contrôleur associé à la page en cours
@@ -107,6 +110,36 @@ abstract class controleur {
 			}
 		}
 	}
+	
+	
+	protected function getNavigation() {
+	    // ===============================================================================================================
+	    // cas général : numérotatio n des sections classique...
+	    // ===============================================================================================================
+	    
+	    if (!$this->existe("nav")) {
+	       $this->nav = (object) array("sectionPremiere" => 1,
+	                                   "sectionPrecedente" => $this->section - 1,
+	                                   "sectionSuivante" => $this->section + 1,
+	                                   "sectionDerniere" => $this->nbSections);
+	                                  
+	     
+	    
+	       // ===============================================================================================================
+	       // cas ganéral
+	       // ===============================================================================================================
+	       
+	    }else {
+	        // JE FAIS RIEN
+	    }
+	    
+	    
+	    
+	    
+	    return new navigation($this->module, $this->page, $this->action, $this->section, $this->nbSections, $this->nav);
+	}
+	
+	
 	
 	/**
 	 * Teste si la propriété $propriete passée en paramètre existe (totalement ou partiellement) dans le tableau $donnees
@@ -369,15 +402,10 @@ abstract class controleur {
 	                $nbAlea = rand(2, count($lesEncarts) -1);
 	                $listeNbEncart[] = $nbAlea;
 // 	            } while (in_array($nbAlea, $listNbEncart));
-	
 	            $listEncart[] = $lesEncarts[$nbAlea];
-	
 	        }
-	
 	       return $listEncart;
-
 	    }
-	
 	
 	   
 	

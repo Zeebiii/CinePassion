@@ -20,8 +20,8 @@
 	<table>
 		<tr class='entete'>
 			<th>les <?php echo $nbFilm;?> films</th>
-			<th>section n°1/<?php echo $nbSections?></th>
-			<th colspan='2'>films n°1 &agrave; 11</th>
+			<th>section n°<?php echo $section;?>/<?php echo $nbSections;?></th>
+			<th colspan='2'>films n°<?php echo $premierFilm;?> &agrave; <?php echo $dernierFilm;?></th>
 		</tr>
 		<tr class='descCol'>
 			<th>titre</th>
@@ -49,6 +49,15 @@
 	
 	<div id="nav">
 	
+		<div id="navBoutons"><?php 
+			echo $navigation->getXhtmlBoutons();?>
+		</div>
+		<div id="navBoutons"><?php 
+ 			echo $navigation->getXhtmlNumeros();?>
+		</div>
+	</div>
+	
+	
 		<a href="index.php" class="premier"></a>
 		<a href="index.php" class="precedant"></a>
 		<a href="index.php" class="suivant"></a>
@@ -57,6 +66,6 @@
 <!-- 		<a> <img src="framework/image/btPrecInactif.png"/> </a> -->
 <!-- 		<a> <img src="framework/image/btSuivInactif.png"/> </a> -->
 <!-- 		<a> <img src="framework/image/btDerInactif.png"/> </a> -->
-	</div>
+<!-- 	</div> -->
 	
 </div><!-- content2 -->
